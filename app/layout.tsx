@@ -1,46 +1,23 @@
 import type React from "react"
 import type { Metadata, Viewport } from "next"
-import localFont from "next/font/local"
+import { Inter } from "next/font/google"
 import { Analytics } from "@vercel/analytics/next"
 import { PageLoader } from "@/components/page-loader"
 import { LoadingProvider } from "@/lib/loading-context"
 import { LocalBusinessSchema } from "@/lib/schema"
 import "./globals.css"
 
-const sfProDisplay = localFont({
-  src: [
-    {
-      path: "../public/fonts/sf-pro-display/SF-Pro-Display-Medium.woff2",
-      weight: "500",
-      style: "normal",
-    },
-    {
-      path: "../public/fonts/sf-pro-display/SF-Pro-Display-Semibold.woff2",
-      weight: "600",
-      style: "normal",
-    },
-  ],
-  variable: "--font-heading",
-  display: "swap",
-  fallback: ["-apple-system", "BlinkMacSystemFont", "system-ui", "sans-serif"],
-})
-
-const sfProText = localFont({
-  src: [
-    {
-      path: "../public/fonts/sf-pro-text/SF-Pro-Text-Regular.woff2",
-      weight: "400",
-      style: "normal",
-    },
-    {
-      path: "../public/fonts/sf-pro-text/SF-Pro-Text-Medium.woff2",
-      weight: "500",
-      style: "normal",
-    },
-  ],
+const inter = Inter({
+  subsets: ["latin"],
   variable: "--font-body",
   display: "swap",
-  fallback: ["-apple-system", "BlinkMacSystemFont", "system-ui", "sans-serif"],
+})
+
+// Use the same font for headings to keep it clean + avoid big typography jumps
+const interHeading = Inter({
+  subsets: ["latin"],
+  variable: "--font-heading",
+  display: "swap",
 })
 
 export const metadata: Metadata = {
@@ -65,11 +42,7 @@ export const metadata: Metadata = {
   authors: [{ name: "Copernicus" }],
   creator: "Copernicus",
   publisher: "Copernicus",
-  formatDetection: {
-    email: false,
-    telephone: false,
-    address: false,
-  },
+  formatDetection: { email: false, telephone: false, address: false },
   robots: {
     index: true,
     follow: true,
@@ -112,19 +85,10 @@ export const metadata: Metadata = {
   icons: {
     icon: "/copernicus-icon.svg",
     apple: "/copernicus-icon.svg",
-    other: [
-      {
-        rel: "apple-touch-icon",
-        url: "/copernicus-icon.svg",
-      },
-    ],
+    other: [{ rel: "apple-touch-icon", url: "/copernicus-icon.svg" }],
   },
   manifest: "/site.webmanifest",
-  appleWebApp: {
-    capable: true,
-    statusBarStyle: "default",
-    title: "Copernicus",
-  },
+  appleWebApp: { capable: true, statusBarStyle: "default", title: "Copernicus" },
   category: "business",
   classification: "Branding Agency",
   generator: "v0.app",
@@ -147,10 +111,8 @@ export default function RootLayout({
   children: React.ReactNode
 }>) {
   return (
-    <html lang="en" className={`${sfProDisplay.variable} ${sfProText.variable}`}>
+    <html lang="en" className={`${inter.variable} ${interHeading.variable}`}>
       <head>
-        <link rel="preconnect" href="https://fonts.googleapis.com" />
-        <link rel="preconnect" href="https://fonts.gstatic.com" crossOrigin="anonymous" />
         <link rel="dns-prefetch" href="https://cdn.vercel-analytics.com" />
         <meta name="apple-mobile-web-app-capable" content="yes" />
         <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent" />
@@ -172,3 +134,4 @@ export default function RootLayout({
     </html>
   )
 }
+
