@@ -1,1 +1,10 @@
-
+export default function AdminPage() {
+  return (
+    <main style={{ padding: 32 }}>
+      <h1 style={{ fontSize: 28, fontWeight: 700 }}>Admin</h1>
+      <p style={{ marginTop: 8, opacity: 0.7 }}>
+        Admin is live. Next step: connect Supabase.
+      </p>
+    </main>
+  );
+}
