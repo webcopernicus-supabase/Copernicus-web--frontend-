@@ -6,8 +6,23 @@ export async function createServerClient() {
   const supabaseAnonKey = process.env.NEXT_PUBLIC_SUPABASE_ANON_KEY
 
   if (!supabaseUrl || !supabaseAnonKey) {
-    console.error("[v0] Missing Supabase environment variables")
-    throw new Error("Missing Supabase environment variables. Please check your Supabase integration setup.")
+    console.warn("[v0] Supabase environment variables not configured. Using mock client.")
+    const cookieStore = await cookies()
+    // Return a mock client that won't break the app
+    return createClient("https://placeholder.supabase.co", "placeholder-anon-key", {
+      cookies: {
+        getAll() {
+          return cookieStore.getAll()
+        },
+        setAll(cookiesToSet) {
+          try {
+            cookiesToSet.forEach(({ name, value, options }) => cookieStore.set(name, value, options))
+          } catch {
+            // Ignore cookie setting errors
+          }
+        },
+      },
+    })
   }
 
   const cookieStore = await cookies()

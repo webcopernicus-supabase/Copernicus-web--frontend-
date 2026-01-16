@@ -2,6 +2,8 @@ import { createServerClient } from "@/lib/supabase/server"
 import { FileText, Users, Trash2, Edit, Plus, LogIn, LogOut, UserPlus } from "lucide-react"
 import { AuditLogClient } from "@/components/admin/audit-log-client"
 
+export const dynamic = "force-dynamic"
+
 export default async function AuditLog() {
   const supabase = await createServerClient()
 

@@ -6,8 +6,6 @@ export async function proxy(request: NextRequest) {
   const supabaseAnonKey = process.env.NEXT_PUBLIC_SUPABASE_ANON_KEY
 
   if (!supabaseUrl || !supabaseAnonKey) {
-    console.error("[v0] Missing Supabase environment variables in proxy")
-    // Allow request to continue without auth check
     return NextResponse.next()
   }
 

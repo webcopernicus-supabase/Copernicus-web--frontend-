@@ -1,6 +1,8 @@
 import { createServerClient } from "@/lib/supabase/server"
 import LeadsClient from "@/components/admin/leads-client"
 
+export const dynamic = "force-dynamic"
+
 export default async function LeadsPage() {
   const supabase = await createServerClient()
 

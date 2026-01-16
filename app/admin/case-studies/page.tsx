@@ -1,6 +1,8 @@
 import { createServerClient } from "@/lib/supabase/server"
 import CaseStudiesClient from "@/components/admin/case-studies-client"
 
+export const dynamic = "force-dynamic"
+
 export default async function CaseStudiesPage() {
   const supabase = await createServerClient()
 

@@ -1,6 +1,8 @@
 import BlogClient from "@/components/admin/blog-client"
 import { createServerClient } from "@/lib/supabase/server"
 
+export const dynamic = "force-dynamic"
+
 export default async function BlogPage() {
   const supabase = await createServerClient()
 
